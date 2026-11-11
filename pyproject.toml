@@ -1,11 +1,11 @@
 [project]
-name = "agentmandates"
-version = "0.1.0"
-description = "Spend mandates for AI agents: signed, verifiable limits on what an agent may pay, compatible with AP2."
+name = "ritta"
+version = "0.2.0"
+description = "Signed spend mandates for AI agents: create, sign and verify what an agent may pay, on whose behalf, and within which limits."
 readme = "README.md"
 license = "Apache-2.0"
 requires-python = ">=3.12"
-authors = [{ name = "agentmandates" }]
+authors = [{ name = "Ramiro Ritta" }]
 keywords = ["ai-agents", "payments", "mandates", "ap2", "mcp", "mercadopago", "x402", "agentic-commerce"]
 classifiers = [
   "Development Status :: 2 - Pre-Alpha",
@@ -25,15 +25,16 @@ dependencies = [
 mcp = ["mcp>=1.2"]
 
 [project.urls]
-Homepage = "https://example.invalid"
-Repository = "https://github.com/RamiroRitta/mandates"
+Homepage = "https://ritta.io"
+Documentation = "https://ritta.dev"
+Repository = "https://github.com/ritta-io/mandates"
 
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/agentmandates"]
+packages = ["src/ritta"]
 
 [dependency-groups]
 dev = [

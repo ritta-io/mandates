@@ -7,7 +7,7 @@ from datetime import UTC, datetime, timedelta
 from hypothesis import given
 from hypothesis import strategies as st
 
-from agentmandates.mandates import Limits, Mandate, Scope, generate_keypair, sign, verify
+from ritta.mandates import Limits, Mandate, Scope, generate_keypair, sign, verify
 
 # One key pair for the whole module, generated at runtime (no secrets in the repo).
 PRIVATE_KEY, PUBLIC_KEY = generate_keypair()

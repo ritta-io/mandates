@@ -4,7 +4,7 @@ import pytest
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric import ec
 
-from agentmandates.mandates.keys import (
+from ritta.mandates.keys import (
     generate_keypair,
     load_private_key_pem,
     load_public_key_pem,

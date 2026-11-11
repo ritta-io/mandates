@@ -8,9 +8,9 @@ from typing import Any
 
 import pytest
 
-from agentmandates.mandates import Limits, Mandate, Scope, generate_keypair, sign, verify
-from agentmandates.mandates.keys import Ed25519PrivateKey, Ed25519PublicKey
-from agentmandates.mandates.sdjwt import issue
+from ritta.mandates import Limits, Mandate, Scope, generate_keypair, sign, verify
+from ritta.mandates.keys import Ed25519PrivateKey, Ed25519PublicKey
+from ritta.mandates.sdjwt import issue
 
 from .conftest import NOW
 
@@ -91,16 +91,27 @@ def test_malformed_claims_with_valid_signature(
 ) -> None:
     claims = make_mandate().to_claims()
     bad_claims: list[dict[str, Any]] = [
-        {k: v for k, v in claims.items() if k != "agentmandates:hitl_threshold"},
-        {**claims, "agentmandates:limits.total": 15_000_000.0},
-        {**claims, "agentmandates:limits.per_operation": "5000000"},
+        {k: v for k, v in claims.items() if k != "ritta:hitl_threshold"},
+        {**claims, "ritta:limits.total": 15_000_000.0},
+        {**claims, "ritta:limits.per_operation": "5000000"},
         {**claims, "exp": "tomorrow"},
-        {**claims, "agentmandates:state": "pending"},
-        {**claims, "agentmandates:limits.currency": "pesos"},
+        {**claims, "ritta:state": "pending"},
+        {**claims, "ritta:limits.currency": "pesos"},
     ]
     for bad in bad_claims:
         result = _check(issue(bad, keypair[0]), keypair[1])
         assert not result.ok and result.reason == "malformed", bad
+
+
+def test_legacy_claim_prefix_rejected(
+    keypair: KeyPair, make_mandate: Callable[..., Mandate]
+) -> None:
+    # 0.1.0 used the "agentmandates:" prefix; 0.2.0 does not accept it (see spec).
+    legacy = {
+        k.replace("ritta:", "agentmandates:", 1): v for k, v in make_mandate().to_claims().items()
+    }
+    result = _check(issue(legacy, keypair[0]), keypair[1])
+    assert not result.ok and result.reason == "malformed"
 
 
 def test_check_order_reports_first_failure(token: str, keypair: KeyPair) -> None:
@@ -141,7 +152,7 @@ def test_deterministic(token: str, keypair: KeyPair) -> None:
 def test_tampered_payload_rejected(token: str, keypair: KeyPair) -> None:
     header_b64, payload_b64, sig_b64 = token[:-1].split(".")
     payload = json.loads(base64.urlsafe_b64decode(payload_b64 + "=" * (-len(payload_b64) % 4)))
-    payload["agentmandates:limits.per_operation"] = 15_000_000
+    payload["ritta:limits.per_operation"] = 15_000_000
     raw = json.dumps(payload, separators=(",", ":")).encode()
     forged = base64.urlsafe_b64encode(raw).rstrip(b"=").decode()
     result = _check(f"{header_b64}.{forged}.{sig_b64}~", keypair[1], amount=10_000_000)

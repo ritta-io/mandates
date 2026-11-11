@@ -5,7 +5,7 @@ within limits, a scope and an expiry. Amounts are always integers in the minor u
 of the currency (cents for ARS/BRL, base units for tokens). Floats are rejected.
 
 Claim names follow ``docs/spec-mandate.md``: standard JWT claims (``iss``, ``sub``,
-``exp``, ``jti``) plus flat ``agentmandates:``-prefixed extension claims for what
+``exp``, ``jti``) plus flat ``ritta:``-prefixed extension claims for what
 AP2 does not cover.
 """
 
@@ -42,13 +42,13 @@ _ISSUER_RE = re.compile(r"^(did:[a-z0-9]+:\S+|https://\S+)$")
 MandateState = Literal["open", "closed"]
 
 # Claim names (see docs/spec-mandate.md).
-CLAIM_TOTAL = "agentmandates:limits.total"
-CLAIM_PER_OPERATION = "agentmandates:limits.per_operation"
-CLAIM_CURRENCY = "agentmandates:limits.currency"
-CLAIM_MERCHANTS = "agentmandates:scope.merchants"
-CLAIM_CATEGORIES = "agentmandates:scope.categories"
-CLAIM_HITL_THRESHOLD = "agentmandates:hitl_threshold"
-CLAIM_STATE = "agentmandates:state"
+CLAIM_TOTAL = "ritta:limits.total"
+CLAIM_PER_OPERATION = "ritta:limits.per_operation"
+CLAIM_CURRENCY = "ritta:limits.currency"
+CLAIM_MERCHANTS = "ritta:scope.merchants"
+CLAIM_CATEGORIES = "ritta:scope.categories"
+CLAIM_HITL_THRESHOLD = "ritta:hitl_threshold"
+CLAIM_STATE = "ritta:state"
 
 REQUIRED_CLAIMS: frozenset[str] = frozenset(
     {

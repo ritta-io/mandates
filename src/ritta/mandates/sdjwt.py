@@ -41,7 +41,7 @@ from cryptography.hazmat.primitives.asymmetric.ed25519 import (
     Ed25519PublicKey,
 )
 
-from agentmandates.mandates.model import Mandate
+from ritta.mandates.model import Mandate
 
 # DECISION NEEDED: the current SD-JWT VC draft (draft-ietf-oauth-sd-jwt-vc) renamed
 # the media type to `dc+sd-jwt` and requires a `vct` claim. We emit `vc+sd-jwt` and no
