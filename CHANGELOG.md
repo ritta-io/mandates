@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+## 0.2.0
+
+- Renamed to Ritta: the PyPI distribution and the import package are now `ritta` (was `agentmandates`).
+- Claim prefix changed from `agentmandates:` to `ritta:` (e.g. `ritta:limits.total`). Tokens with the old prefix are rejected as `malformed`; see the compatibility note in the spec.
+- No functional changes.
+
 ## 0.1.0
 
 - `Mandate`, `Limits` and `Scope` models (pydantic v2) with every claim required by the spec; integer amounts only.

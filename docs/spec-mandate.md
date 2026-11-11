@@ -1,4 +1,4 @@
-# Especificación del mandato (nombre en clave agentmandates) (borrador v0, implementado en 0.1.0)
+# Especificación del mandato Ritta (borrador v0, implementado en 0.2.0)
 
 Un **mandato** es una credencial verificable (SD-JWT) que autoriza a un agente a gastar dentro de límites. Mapea a AP2 v0.2; lo que AP2 no cubre va en claims con prefijo `ritta:`.
 
@@ -6,7 +6,7 @@ Un **mandato** es una credencial verificable (SD-JWT) que autoriza a un agente a
 
 Los nombres son literales y planos: `ritta:limits.total` es un único claim, no un objeto anidado.
 
-> **Compatibilidad.** La versión 0.1.0 usaba el prefijo `agentmandates:` (nombre en clave del proyecto). Desde 0.2.0 el prefijo es `ritta:` y un verificador 0.2.0 **no acepta** mandatos con el prefijo anterior: los rechaza como `malformed` porque les faltan los claims obligatorios. No se ofrece migración porque 0.1.0 no tuvo usuarios externos.
+> **Compatibilidad.** La versión 0.1.0 usaba el prefijo `agentmandates:`. Desde 0.2.0 el prefijo es `ritta:` y un verificador 0.2.0 **no acepta** mandatos con el prefijo anterior: los rechaza como `malformed` porque les faltan los claims obligatorios. No se ofrece migración porque 0.1.0 no tuvo usuarios externos.
 
 | Claim | Tipo | Significado |
 |---|---|---|

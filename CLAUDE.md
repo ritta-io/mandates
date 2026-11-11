@@ -4,24 +4,24 @@ Este archivo es la memoria de trabajo de Claude Code en este repo. Leelo entero 
 
 ## Qué es el proyecto (en una oración)
 
-> Nombre en clave: **agentmandates**. El nombre comercial se define antes de la etapa 4 (primera publicación). Hasta entonces, no publicar nada en PyPI, npm ni directorios.
+> Nombre: **Ritta** (ritta.io, docs en ritta.dev). Repo: https://github.com/ritta-io/mandates. Paquete en PyPI: `ritta`. Publicar en PyPI solo desde un tag `v*` (release de GitHub → `.github/workflows/publish.yml`), nunca a mano ni desde una rama.
 
 El producto le pone límites a la inteligencia artificial cuando gasta plata: el dueño define hasta cuánto puede pagar un agente y en qué, cada pago se verifica contra esa regla antes de ejecutarse, y todo queda registrado de forma auditable. La plata nunca pasa por nosotros: pasa por Mercado Pago, Pix o una wallet del cliente.
 
 ## Qué es ESTE repo
 
-`mandates` es la **librería open source (Apache 2.0)** del formato de mandato y su verificación, más el SDK de cliente en Python. Es la capa de adquisición: lo que un desarrollador instala con `pip install <nombre>` (hoy `agentmandates`, provisorio) para que su agente pueda pedir permiso de gasto de forma estándar.
+`mandates` es la **librería open source (Apache 2.0)** del formato de mandato y su verificación, más el SDK de cliente en Python. Es la capa de adquisición: lo que un desarrollador instala con `pip install ritta` para que su agente pueda pedir permiso de gasto de forma estándar.
 
 Lo que vive acá:
-- `agentmandates.mandates`: modelo de mandato, firma, verificación, serialización. Compatible con **AP2 v0.2** (Agent Payments Protocol, hoy en la FIDO Alliance): el mandato es una credencial verificable **SD-JWT**, con estados `open` (presupuesto + restricciones) y `closed` (monto atado a un checkout concreto).
-- `agentmandates.client`: cliente HTTP y herramientas MCP para hablar con un el gateway (`create_mandate`, `quote`, `request_payment`, `get_receipt`).
+- `ritta.mandates`: modelo de mandato, firma, verificación, serialización. Compatible con **AP2 v0.2** (Agent Payments Protocol, hoy en la FIDO Alliance): el mandato es una credencial verificable **SD-JWT**, con estados `open` (presupuesto + restricciones) y `closed` (monto atado a un checkout concreto).
+- `ritta.client`: cliente HTTP y herramientas MCP para hablar con un el gateway (`create_mandate`, `quote`, `request_payment`, `get_receipt`).
 - `docs/`: spec del mandato en español, inglés y portugués.
 
 Lo que NO vive acá (vive en `gateway`, repo privado): el motor de políticas, los rieles de pago (Mercado Pago, x402, Pix), el ledger, el audit log, el panel, la facturación.
 
 ## Stack y convenciones
 
-- Python 3.12. Gestor: `uv`. Empaquetado con `pyproject.toml` (hatchling). Nombre del paquete en PyPI: `agentmandates`.
+- Python 3.12. Gestor: `uv`. Empaquetado con `pyproject.toml` (hatchling). Nombre del paquete en PyPI: `ritta`.
 - Tipado estricto: `mypy --strict` pasa siempre. Modelos con `pydantic` v2.
 - Firma y verificación: `cryptography` (Ed25519 por defecto) y SD-JWT según el borrador IETF `draft-ietf-oauth-selective-disclosure-jwt`. No inventar criptografía: usar primitivas estándar.
 - Tests con `pytest` + `hypothesis` para propiedades (un mandato nunca se verifica con firma inválida, vencido, o con monto mayor al restante).
@@ -34,7 +34,7 @@ Lo que NO vive acá (vive en `gateway`, repo privado): el motor de políticas, l
 2. **Nada de secretos en el código ni en los tests.** Claves de prueba se generan en el test. Nunca commitear `.env`, tokens de Mercado Pago, claves privadas.
 3. **Un mandato tiene siempre:** emisor (quién autoriza), sujeto (qué agente), límites (monto total, monto por operación, moneda), alcance (comercios o categorías permitidas), vencimiento, nonce, y firma. Si falta uno, el constructor falla.
 4. **Verificación es pura y determinista:** misma entrada, misma salida, sin red. La verificación de un mandato no llama a ningún servicio externo.
-5. **Compatibilidad AP2 primero.** Si hay que elegir entre un diseño propio y uno que mapea limpio a AP2/Verifiable Credentials, se elige AP2. Lo que no cubre AP2 va en extensiones con prefijo `agentmandates:`.
+5. **Compatibilidad AP2 primero.** Si hay que elegir entre un diseño propio y uno que mapea limpio a AP2/Verifiable Credentials, se elige AP2. Lo que no cubre AP2 va en extensiones con prefijo `ritta:`.
 6. **Idempotencia:** toda operación que pueda repetirse lleva `idempotency_key`.
 7. **Montos en enteros** (centavos/unidad mínima) con moneda ISO 4217 o identificador de token. Nunca `float`.
 

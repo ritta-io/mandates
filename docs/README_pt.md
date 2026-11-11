@@ -1,8 +1,8 @@
-# Mandates (nome de código: agentmandates)
+# Ritta · mandates
 
 [Español](../README.md) · [English](README_en.md) · **Português**
 
-Este projeto coloca limites na inteligência artificial quando ela gasta o seu dinheiro: você decide quanto um agente pode pagar e em quê, cada pagamento é verificado contra essa regra antes de ser executado, e tudo fica registrado. O dinheiro nunca passa pelo produto.
+A [Ritta](https://ritta.io) coloca limites na inteligência artificial quando ela gasta o seu dinheiro: você decide quanto um agente pode pagar e em quê, cada pagamento é verificado contra essa regra antes de ser executado, e tudo fica registrado. O dinheiro nunca passa pela Ritta.
 
 Este repositório é a biblioteca open source (Apache 2.0) do **mandato**: a permissão assinada que diz "este agente pode gastar até X, em Y, em nome de Z". É compatível com o [AP2](https://fidoalliance.org/) (Agent Payments Protocol) e é usada com o gateway para pagar com Mercado Pago, Pix e USDC.
 
@@ -43,11 +43,11 @@ Se o pagamento não for autorizado, `result.ok` é `False` e `result.reason` diz
 
 As chaves são exportadas e importadas em PEM com `ritta.mandates.private_key_to_pem`, `public_key_to_pem`, `load_private_key_pem` e `load_public_key_pem`. Nunca guarde uma chave privada no repositório.
 
-A especificação do formato está em [`spec-mandate.md`](spec-mandate.md) (em espanhol).
+Documentação: [ritta.dev](https://ritta.dev). A especificação do formato está em [`spec-mandate.md`](spec-mandate.md) (em espanhol).
 
 ## Status
 
-Pré-alfa (0.1.0). Etapa 1 do roadmap: veja [`roadmap.md`](roadmap.md).
+Pré-alfa (0.2.0). Etapa 1 do roadmap: veja [`roadmap.md`](roadmap.md).
 
 ## Licença
 
