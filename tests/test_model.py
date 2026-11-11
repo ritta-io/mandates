@@ -118,8 +118,8 @@ def test_mandate_is_immutable(make_mandate: Callable[..., Mandate]) -> None:
 def test_claims_round_trip(make_mandate: Callable[..., Mandate]) -> None:
     mandate = make_mandate()
     claims = mandate.to_claims()
-    assert claims["agentmandates:limits.total"] == 15_000_000
-    assert claims["agentmandates:state"] == "open"
+    assert claims["ritta:limits.total"] == 15_000_000
+    assert claims["ritta:state"] == "open"
     assert Mandate.from_claims(claims) == mandate
 
 
