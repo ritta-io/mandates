@@ -49,6 +49,17 @@ Documentación: [ritta.dev](https://ritta.dev). La especificación del formato e
 
 Pre-alpha (0.2.0). Etapa 1 del roadmap: ver [`docs/roadmap.md`](docs/roadmap.md).
 
+## Publicación (mantenedores)
+
+Las versiones se publican en PyPI como `ritta` solo desde un release de GitHub con tag `v*` (por ejemplo `v0.2.0`, que tiene que coincidir con `version` en `pyproject.toml`). Lo hace `.github/workflows/publish.yml` con *trusted publishing*: no hay tokens de PyPI en los secretos del repo.
+
+Configuración, una sola vez:
+
+1. En pypi.org, con la cuenta dueña del proyecto: *Your account → Publishing → Add a new pending publisher* (o, si el proyecto ya existe, *Manage → Publishing*).
+2. Completar: PyPI project name `ritta`, owner `ritta-io`, repository `mandates`, workflow name `publish.yml`, environment name `pypi`.
+3. En GitHub, *Settings → Environments* del repo `ritta-io/mandates`: crear el environment `pypi` (conviene agregar *required reviewers* para aprobar cada publicación).
+4. Publicar: actualizar `version` y `CHANGELOG.md`, mergear a `main`, y crear el release con tag `vX.Y.Z` desde la pestaña *Releases*.
+
 ## Licencia
 
 Apache 2.0.
