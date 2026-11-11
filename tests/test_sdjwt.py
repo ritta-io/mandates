@@ -7,9 +7,9 @@ from typing import Any
 
 import pytest
 
-from agentmandates.mandates import Mandate, sign
-from agentmandates.mandates.keys import Ed25519PrivateKey, Ed25519PublicKey
-from agentmandates.mandates.sdjwt import (
+from ritta.mandates import Mandate, sign
+from ritta.mandates.keys import Ed25519PrivateKey, Ed25519PublicKey
+from ritta.mandates.sdjwt import (
     InvalidSignatureError,
     MalformedTokenError,
     decode,
@@ -52,7 +52,7 @@ def test_round_trip(keypair: KeyPair, make_mandate: Callable[..., Mandate]) -> N
 
 
 def test_wrong_key(keypair: KeyPair, make_mandate: Callable[..., Mandate]) -> None:
-    from agentmandates.mandates import generate_keypair
+    from ritta.mandates import generate_keypair
 
     _, other_public = generate_keypair()
     with pytest.raises(InvalidSignatureError):

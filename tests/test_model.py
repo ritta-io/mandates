@@ -6,7 +6,7 @@ from datetime import UTC, datetime, timedelta, timezone
 import pytest
 from pydantic import ValidationError
 
-from agentmandates.mandates import Limits, Mandate, Scope
+from ritta.mandates import Limits, Mandate, Scope
 
 REQUIRED_FIELDS = ["issuer", "subject", "limits", "scope", "hitl_threshold", "state", "expires_at"]
 

@@ -1,15 +1,15 @@
 """Mandate model, signing (SD-JWT, Ed25519) and pure verification."""
 
-from agentmandates.mandates.keys import (
+from ritta.mandates.keys import (
     generate_keypair,
     load_private_key_pem,
     load_public_key_pem,
     private_key_to_pem,
     public_key_to_pem,
 )
-from agentmandates.mandates.model import Limits, Mandate, Scope
-from agentmandates.mandates.sdjwt import sign
-from agentmandates.mandates.verify import RejectionReason, VerificationResult, verify
+from ritta.mandates.model import Limits, Mandate, Scope
+from ritta.mandates.sdjwt import sign
+from ritta.mandates.verify import RejectionReason, VerificationResult, verify
 
 __all__ = [
     "Limits",

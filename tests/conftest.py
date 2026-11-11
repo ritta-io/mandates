@@ -6,8 +6,8 @@ from typing import Any
 
 import pytest
 
-from agentmandates.mandates import Limits, Mandate, Scope, generate_keypair
-from agentmandates.mandates.keys import Ed25519PrivateKey, Ed25519PublicKey
+from ritta.mandates import Limits, Mandate, Scope, generate_keypair
+from ritta.mandates.keys import Ed25519PrivateKey, Ed25519PublicKey
 
 # Fixed clock so tests are deterministic.
 NOW = datetime(2026, 1, 15, 12, 0, tzinfo=UTC)

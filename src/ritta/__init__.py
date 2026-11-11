@@ -1,6 +1,6 @@
-"""agentmandates (codename): spend mandates for AI agents."""
+"""Ritta: signed spend mandates for AI agents."""
 
-from agentmandates.mandates import (
+from ritta.mandates import (
     Limits,
     Mandate,
     Scope,
@@ -10,7 +10,7 @@ from agentmandates.mandates import (
     verify,
 )
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 
 __all__ = [
     "Limits",

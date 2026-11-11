@@ -7,11 +7,11 @@ Este proyecto le pone límites a la inteligencia artificial cuando gasta tu plat
 Este repo es la librería open source (Apache 2.0) del **mandato**: el permiso firmado que dice "este agente puede gastar hasta X, en Y, en nombre de Z". Es compatible con [AP2](https://fidoalliance.org/) (Agent Payments Protocol) y se usa con el gateway para pagar con Mercado Pago, Pix y USDC.
 
 ```bash
-pip install agentmandates
+pip install ritta
 ```
 
 ```python
-from agentmandates import Limits, Mandate, Scope, generate_keypair, sign, verify
+from ritta import Limits, Mandate, Scope, generate_keypair, sign, verify
 
 private_key, public_key = generate_keypair()
 
@@ -41,7 +41,7 @@ Si el pago no está autorizado, `result.ok` es `False` y `result.reason` dice po
 
 `verify` es pura: no usa red ni guarda estado. Misma entrada, misma salida (pasá `now=` para fijar el reloj).
 
-Las claves se exportan e importan en PEM con `agentmandates.mandates.private_key_to_pem`, `public_key_to_pem`, `load_private_key_pem` y `load_public_key_pem`. Nunca guardes una clave privada en el repositorio.
+Las claves se exportan e importan en PEM con `ritta.mandates.private_key_to_pem`, `public_key_to_pem`, `load_private_key_pem` y `load_public_key_pem`. Nunca guardes una clave privada en el repositorio.
 
 La especificación del formato está en [`docs/spec-mandate.md`](docs/spec-mandate.md).
 

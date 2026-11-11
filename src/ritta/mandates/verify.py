@@ -9,8 +9,8 @@ from typing import Literal
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey
 from pydantic import ValidationError
 
-from agentmandates.mandates.model import Mandate
-from agentmandates.mandates.sdjwt import InvalidSignatureError, MalformedTokenError, decode
+from ritta.mandates.model import Mandate
+from ritta.mandates.sdjwt import InvalidSignatureError, MalformedTokenError, decode
 
 RejectionReason = Literal[
     "invalid_signature",

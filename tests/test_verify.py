@@ -8,9 +8,9 @@ from typing import Any
 
 import pytest
 
-from agentmandates.mandates import Limits, Mandate, Scope, generate_keypair, sign, verify
-from agentmandates.mandates.keys import Ed25519PrivateKey, Ed25519PublicKey
-from agentmandates.mandates.sdjwt import issue
+from ritta.mandates import Limits, Mandate, Scope, generate_keypair, sign, verify
+from ritta.mandates.keys import Ed25519PrivateKey, Ed25519PublicKey
+from ritta.mandates.sdjwt import issue
 
 from .conftest import NOW
 
